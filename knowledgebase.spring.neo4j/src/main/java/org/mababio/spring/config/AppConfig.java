@@ -1,4 +1,4 @@
-package org.mababio.spring.app.config;
+package org.mababio.spring.config;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.springframework.context.annotation.Bean;

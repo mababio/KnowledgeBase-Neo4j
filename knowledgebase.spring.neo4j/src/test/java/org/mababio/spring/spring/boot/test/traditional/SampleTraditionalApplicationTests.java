@@ -12,12 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ 
 
 package org.mababio.spring.spring.boot.test.traditional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mababio.spring.main.SampleTraditionalApplication;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -31,11 +32,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
+*//**
  * Basic integration tests for demo application.
  * 
  * @author Dave Syer
- */
+ *//*
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleTraditionalApplication.class)
 @WebAppConfiguration
@@ -67,3 +68,4 @@ public class SampleTraditionalApplicationTests {
 	}
 
 }
+*/

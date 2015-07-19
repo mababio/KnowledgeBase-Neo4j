@@ -1,7 +1,6 @@
-package org.mababio.spring.controller;
+/*package org.mababio.spring.controller;
 
-import org.mababio.spring.domain.Person;
-import org.mababio.spring.repo.PersonRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +15,14 @@ public class TestController {
 	
 	
 	@Autowired
-	PersonRepo personRepo;
+	//PersonRepo personRepo;
 	
 	@RequestMapping(value="/me", produces={"application/json"} )
 	public String foo(@RequestParam(value="name") String name){
 		
-		Person person = new Person();
-		
-		person.setLastName(name);
-		
-		personRepo.save(person);
 		return "hom";
 		
 	}
 
 }
+*/

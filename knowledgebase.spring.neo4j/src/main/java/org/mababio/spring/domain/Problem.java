@@ -1,15 +1,27 @@
 package org.mababio.spring.domain;
 
-import org.springframework.data.neo4j.annotation.GraphId;
+
+import java.util.Set;
+
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.mababio.spring.inter.Node;
+
 
 
 @NodeEntity
-public class Problem {
+final public class Problem extends Node  {
 
-@GraphId
-Long id;
+@RelatedTo(type="Sloved_By")
+Set<Solution>solution;
 
+public Set<Solution> getSoluiton() {
+	return solution;
+}
+
+public void addSoluiton(Solution solution) {
+	this.solution.add(solution);
+}
 
 
 	

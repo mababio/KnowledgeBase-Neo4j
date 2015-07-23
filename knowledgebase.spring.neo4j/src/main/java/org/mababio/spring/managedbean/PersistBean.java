@@ -1,7 +1,11 @@
 package org.mababio.spring.managedbean;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
+import javax.faces.bean.RequestScoped;
 
 import org.mababio.spring.domain.Problem;
 import org.mababio.spring.domain.Solution;
@@ -11,22 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @ManagedBean(value="persist")
+@RequestScoped
 public class PersistBean {
 
 @Autowired
-ProblemRepository problemRepository;
+private ProblemRepository problemRepository;
 @Autowired
-SolutionRepository solutionRepository;
-Problem problem = new Problem();
-Solution solution = new Solution();
+private SolutionRepository solutionRepository;
 
-/*
-@PostConstruct
-public void setup(){
-}*/
+
+private List<Problem>problemList = new ArrayList<Problem>();
+
+private Problem problem;
 
 
 public Problem getProblem() {
+	this.problem =  new Problem();
 	return problem;
 }
 
@@ -34,18 +38,19 @@ public void setProblem(Problem problem) {
 	this.problem = problem;
 }
 
-public Solution getSolution() {
-	return solution;
+
+public void addProblem(){
+	problemList.add(this.problem);
 }
 
-public void setSolution(Solution solution) {
-	this.solution = solution;
+public void persist(){
+	problemList.stream().forEach(s -> problemRepository.save(s));
 }
 
-public void work(){
-	problemRepository.save(problem);
-	solutionRepository.save(solution);
-}
+
+
+
+
 
 
 	

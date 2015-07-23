@@ -10,10 +10,8 @@
     	<h2>Testing JSF</h2>
     	<h:form>
     	   Problem:<h:inputText value="#{persist.problem.content}"></h:inputText>
-    	   <br></br>
-    	   Solution:<h:inputText value="#{persist.solution.content}"></h:inputText>
-    	   <br></br>
-    	   <h:commandButton value="Persist" action="#{persist.work}"></h:commandButton>
+    	   <h:commandButton value="add" action="#{persist.addProblem()}"></h:commandButton>
+    	   <h:commandButton value="persist" action="#{persist.persist()}"></h:commandButton>
     	</h:form>
     </h:body>
 </html>

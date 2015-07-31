@@ -1,8 +1,8 @@
 package org.mababio.spring.inter;
 
 import java.util.Date;
+import java.util.Set;
 
-import javax.validation.constraints.NotNull;
 
 import org.springframework.data.neo4j.annotation.GraphId;
 
@@ -11,10 +11,10 @@ public abstract class Node {
 	@GraphId
 	private Long id;
 	
-	@NotNull
+	
 	private Date date;
 	
-	@NotNull
+	
 	private String content;
 	
 	
@@ -27,22 +27,28 @@ public abstract class Node {
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public Node setId(Long id) {
 		this.id = id;
+		return this;
 	}
 	public Date getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public Node setDate(Date date) {
 		this.date = date;
+		return this;
 	}
 	public String getContent() {
 		return content;
 	}
-	public void setContent(String cotent) {
+	public Node setContent(String cotent) {
 		this.content = cotent;
+		return this;
 	}
 	
 	
+	/* the comsume method helps vacillate the creation of relationship between nodes */
+	abstract public Node  consume(Node load);	
+	abstract public Node  consume(Set<? extends Node> load);
 
 }

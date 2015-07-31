@@ -1,4 +1,4 @@
-/*package org.mababio.spring.rest;
+package org.mababio.spring.rest;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,4 +20,3 @@ import org.springframework.web.bind.annotation.RestController;
 	
 
 }
-*/

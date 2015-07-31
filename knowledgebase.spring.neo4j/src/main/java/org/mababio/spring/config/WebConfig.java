@@ -11,13 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
-@ComponentScan
+@ComponentScan(basePackages="org.mababio.spring")
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("home");
+		//registry.addViewController("/").setViewName("home");
 	}
 
 	@Bean

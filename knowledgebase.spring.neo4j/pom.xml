@@ -5,7 +5,7 @@
 		<!-- Your own application should inherit from spring-boot-starter-parent -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.0.2.RELEASE</version>
+		<version>1.2.5.RELEASE</version>
 	</parent>
 	<artifactId>knowledgebase.spring.neo4j</artifactId>
 	<groupId>org.mababio.spring</groupId>
@@ -21,24 +21,32 @@
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
-		<!-- Compile -->
+	
+	
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<version>1.0.0.beta3</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-	<groupId>org.springframework</groupId>
-	<artifactId>spring-web</artifactId>
-	<!-- <version>4.1.7.RELEASE</version> -->
-</dependency>
 		
-		<!-- <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency> -->
-		<!-- Provided (for embedded war support) -->
+		
+		
+	
+	<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		Provided (for embedded war support)
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -49,11 +57,27 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+	 -->
+	
+	
+		
+		
+		
+		
+		
+		
+
+		
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -80,25 +104,38 @@
 			<artifactId>jersey-client</artifactId>
 			<version>2.19</version>
 		</dependency>
-		<!-- <dependency>
-	<groupId>com.sun.faces</groupId>
-	<artifactId>jsf-api</artifactId>
-	<version>2.2.11</version>
-</dependency> -->
+		
+		
+	
 <dependency>
-	<groupId>org.apache.myfaces.core</groupId>
-	<artifactId>myfaces-impl</artifactId>
-	<version>2.2.8</version>
-</dependency>
-
-		<dependency>
-	<groupId>org.primefaces</groupId>
-	<artifactId>primefaces</artifactId>
-	<version>5.2</version>
-</dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    </dependency>
 		
 		
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>7.5.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+			<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-commons</artifactId>
+	<version>1.10.1.RELEASE</version>
+			
+			
+			</dependency>
+			
+        
+        
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>

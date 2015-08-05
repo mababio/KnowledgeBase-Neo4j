@@ -1,13 +1,22 @@
 package org.mababio.spring.inter;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 
+
+
 import org.springframework.data.neo4j.annotation.GraphId;
 
-public abstract class Node {
+public abstract class Node implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	@GraphId
 	private Long id;
 	
@@ -15,6 +24,31 @@ public abstract class Node {
 	private Date date;
 	
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		return true;
+	}
 	private String content;
 	
 	

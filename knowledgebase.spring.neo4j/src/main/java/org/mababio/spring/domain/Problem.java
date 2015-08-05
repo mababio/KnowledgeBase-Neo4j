@@ -35,11 +35,14 @@ public Set<Solution> getSolution() {
 @Override
 public Problem consume(Node load) {
 	
-	if(!load.getContent().isEmpty() &&load instanceof Tag ){
-		this.tags.add((Tag)load);
-	}else if (load instanceof Solution) {
-		this.solutions.add((Solution)load);
+	if(!load.getContent().isEmpty()){
+		if(load instanceof Tag ){
+			this.tags.add((Tag)load);
+		}else if (load instanceof Solution) {
+			this.solutions.add((Solution)load);
+		}
 	}
+	
 	
 	return this;
 }

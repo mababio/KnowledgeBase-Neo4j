@@ -12,9 +12,7 @@ import org.mababio.spring.inter.Node;
 final public class Problem extends Node  {
 
 	
-	public  Problem() {
-		// TODO Auto-generated constructor stub
-	}
+private static final long serialVersionUID = 1L;
 
 @RelatedTo(type="Sloved_By")
 private Set<Solution> solutions = new HashSet<Solution>();
@@ -32,6 +30,7 @@ public Set<Solution> getSolution() {
 }
 
 
+/* Does not consume if the content of node is empty*/
 @Override
 public Problem consume(Node load) {
 	
@@ -42,8 +41,6 @@ public Problem consume(Node load) {
 			this.solutions.add((Solution)load);
 		}
 	}
-	
-	
 	return this;
 }
 
@@ -51,13 +48,9 @@ public Problem consume(Node load) {
 @Override
 public Problem consume(Set< ? extends Node> load) {
 	load.stream().forEach(tag -> consume(tag));
-	
 	return this;
-	}
-	
-
-
+}
 
 	
-	
+
 }

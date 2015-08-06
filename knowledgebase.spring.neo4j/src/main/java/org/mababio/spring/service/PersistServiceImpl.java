@@ -2,12 +2,12 @@ package org.mababio.spring.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.mababio.spring.inter.Node;
 import org.mababio.spring.domain.Problem;
 import org.mababio.spring.domain.Solution;
 import org.mababio.spring.domain.Tag;
-
 import org.mababio.spring.inter.PersistService;
 import org.mababio.spring.repo.ProblemRepository;
 import org.mababio.spring.repo.SolutionRepository;
@@ -28,9 +28,9 @@ public class PersistServiceImpl implements  PersistService {
 	@Autowired
 	private  ProblemRepository proRepository;
 	@Autowired
-	private  SolutionRepository solRepository;
+	private static SolutionRepository solRepository;
 	@Autowired
-	private  TagRepository tagRepository;
+	private static TagRepository tagRepository;
 	
 	
 	
@@ -45,9 +45,9 @@ public class PersistServiceImpl implements  PersistService {
 	}
 	
 	@Override
-	public  void  persist(Node node){
+	public  void  persist(Node node, Predicate<Node> ped){
 		
-		if(!node.getContent().isEmpty()){
+		if(ped.negate().test(node)){//!node.getContent().isEmpty()
 			if(node instanceof Problem){
 				proRepository.save((Problem)node);
 			}else if(node instanceof Solution){
@@ -57,6 +57,18 @@ public class PersistServiceImpl implements  PersistService {
 			}
 		}
 		
+	}
+	
+	
+	public  void persistTest(Node node){
+		proRepository.save((Problem)node);
+		
+	}
+	
+	
+	@Override
+	public void persist(Node node){
+		this.persist(node, no -> no.getContent().isEmpty());
 	}
 	
 	

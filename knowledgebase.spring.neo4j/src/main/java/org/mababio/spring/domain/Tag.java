@@ -10,7 +10,7 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 @NodeEntity
 public class Tag extends Node {
 	
-	
+	private static final long serialVersionUID = 1L;
 	
 	@RelatedTo(type="Associated_To")
 	private Set<Tag> tags = new HashSet<Tag>();
@@ -18,13 +18,17 @@ public class Tag extends Node {
 	public Set<Tag> getTags() {
 		return tags;
 	}
-
+	
+	
+	/* Does not consume if the content of node is empty*/
 	@Override
 	public Tag consume(Node load) {
+	if(!load.getContent().isEmpty()){
 		if(load instanceof Tag){
 			this.tags.add((Tag)load);
 		}
-		return this;
+	}
+	return this;
 	}
 
 

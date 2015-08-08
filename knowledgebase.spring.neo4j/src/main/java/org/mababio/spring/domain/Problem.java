@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.mababio.spring.inter.Node;
@@ -12,6 +14,10 @@ import org.mababio.spring.inter.Node;
 final public class Problem extends Node  {
 
 	
+	
+	
+	
+
 private static final long serialVersionUID = 1L;
 
 @RelatedTo(type="Sloved_By")
@@ -20,6 +26,18 @@ private Set<Solution> solutions = new HashSet<Solution>();
 @RelatedTo(type="Associated_To")
 private Set<Tag> tags = new HashSet<Tag>();
 
+
+
+@Indexed(unique=true)
+private String content;
+
+public String getContent() {
+	return content;
+}
+public Node setContent(String cotent) {
+	this.content = cotent.toLowerCase();
+	return this;
+}
 
 public  Set<Tag> getTags() {
 	return tags;
@@ -33,6 +51,7 @@ public Set<Solution> getSolution() {
 /* Does not consume if the content of node is empty*/
 @Override
 public Problem consume(Node load) {
+	
 	
 	if(!load.getContent().isEmpty()){
 		if(load instanceof Tag ){

@@ -15,6 +15,8 @@ public interface PersistService {
 	public void persist(final Node node, Predicate<Node> ped);
 	public void persist(final Node node);
 	public void persistTest(final Node node);
-	
+	public void persistP(final Node node);
+	public void persistS(final Node node);
+	public void persistT(final Node node);
 
 }

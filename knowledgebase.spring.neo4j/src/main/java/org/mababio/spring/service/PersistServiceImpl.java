@@ -2,6 +2,7 @@ package org.mababio.spring.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.mababio.spring.inter.Node;
@@ -28,20 +29,25 @@ public class PersistServiceImpl implements  PersistService {
 	@Autowired
 	private  ProblemRepository proRepository;
 	@Autowired
-	private static SolutionRepository solRepository;
+	private  SolutionRepository solRepository;
 	@Autowired
-	private static TagRepository tagRepository;
+	private  TagRepository tagRepository;
 	
 	
 	
 	@Override
 	public void merger(Node consumer, Node load) {
-		consumer.consume(load);
+		//Adding problem tags to the solution node
+		if(consumer instanceof Problem &&!((Problem)consumer).getTags().isEmpty() && load instanceof Solution){
+			((Solution)load).addTags(((Problem)consumer).getTags());
+		}
+		consumer.consume(load); 
 	}
+	//public Function<T, R>
 
 	@Override
 	public void merger(Node consumer, Set<? extends Node> load) {
-		consumer.consume(load);		
+		consumer.consume(load);	  
 	}
 	
 	@Override
@@ -60,9 +66,21 @@ public class PersistServiceImpl implements  PersistService {
 	}
 	
 	
-	public  void persistTest(Node node){
+	public  void persistP(Node node){
 		proRepository.save((Problem)node);
+	}
+	
+	public  void persistS(Node node){
 		
+		if( true && null == solRepository){
+			System.err.println("null for sure!!!! --->>>>>");	
+		}
+		
+		solRepository.save((Solution)node);
+	}
+	
+	public  void persistT(Node node){
+		tagRepository.save((Tag)node);
 	}
 	
 	
@@ -79,6 +97,12 @@ public class PersistServiceImpl implements  PersistService {
 	 */
 	public void  persist(List<? extends Node> list){
 		list.stream().forEach(node -> persist(node));	
+	}
+
+	@Override
+	public void persistTest(Node node) {
+		//proRepository.saveOnly(entity);
+		
 	}
 
 	

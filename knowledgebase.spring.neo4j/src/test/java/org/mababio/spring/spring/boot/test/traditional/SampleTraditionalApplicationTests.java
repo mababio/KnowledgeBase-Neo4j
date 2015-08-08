@@ -55,21 +55,29 @@ public class SampleTraditionalApplicationTests {
 	@Test
 	public  void PersistProblemTest(){
 		
-		Problem problem = new Problem();
-		problem.setContent("Test: Problem one");
 		
-		Solution solution = new Solution();
-		solution.setContent("Test: Solution one");
+		
+		Problem problem = new Problem();
+		problem.setContent("Test: Problem Tag");
+		
+		
+	/*	Solution solution = new Solution();
+		solution.setContent("Test: Solution one");*/
 		
 		Tag tag = new Tag();
-		tag.setContent(" Test Tag one");
+		tag.setContent(" Test Tag four");
 		
-		service.merger(problem, solution);
+		/*service.merger(problem, solution);*/
 		service.merger(problem, tag);
 		
-		assertTrue(null !=service);
+		service.persistP(problem);
 		
-		service.persistTest(problem);
+		//service.persistS(solution);
+		//service.persistT(tag);
+		
+		
+		
+		
 		
 		
 		

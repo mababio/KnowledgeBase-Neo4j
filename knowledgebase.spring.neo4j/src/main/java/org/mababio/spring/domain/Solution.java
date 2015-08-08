@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.mababio.spring.inter.Node;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
@@ -18,8 +19,27 @@ final public class Solution extends Node {
 	@RelatedTo(type="Associated_To")
 	private Set<Tag> tags = new HashSet<Tag>();
 
+	
+	
+	@Indexed(unique=true)
+	private String content;
+
+	public String getContent() {
+		return content;
+	}
+	public Node setContent(String cotent) {
+		this.content = cotent.toLowerCase();
+		return this;
+	}
+	
+	
 	public Set<Tag> getTags() {
 		return tags;
+	}
+	
+
+	public void  addTags(Set<Tag> tags) {
+		tags.addAll(tags);
 	}
 
 	
@@ -27,7 +47,7 @@ final public class Solution extends Node {
 	@Override
 	public Solution consume(Node load) {
 	
-		if(!load.getContent().isEmpty()){
+		if(!((Tag)load).getContent().isEmpty()){
 			if(load instanceof Tag){
 				this.tags.add((Tag)load);
 			}

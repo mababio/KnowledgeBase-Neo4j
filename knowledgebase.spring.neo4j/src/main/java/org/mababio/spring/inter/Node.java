@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 
 
 /*
@@ -18,10 +19,11 @@ public abstract class Node implements Serializable, NodeBuilder {
 
 	@GraphId
 	private Long id;
+	
 	private Date date;
-	private String content;
 	
-	
+	abstract public String getContent();
+	abstract  public Node setContent(String cotent);
 	
 
 	public Node(){
@@ -32,7 +34,7 @@ public abstract class Node implements Serializable, NodeBuilder {
 		return id;
 	}
 	public Node setId(Long id) {
-		this.id = id;
+		this.id = id;  
 		return this;
 	}
 	public Date getDate() {
@@ -42,23 +44,17 @@ public abstract class Node implements Serializable, NodeBuilder {
 		this.date = date;
 		return this;
 	}
-	public String getContent() {
-		return content;
-	}
-	public Node setContent(String cotent) {
-		this.content = cotent.toLowerCase();
-		return this;
-	}
 	
-	@Override
+	
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		return result;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -73,7 +69,7 @@ public abstract class Node implements Serializable, NodeBuilder {
 		} else if (!content.equals(other.content))
 			return false;
 		return true;
-	}
+	}*/
 	
 	
 

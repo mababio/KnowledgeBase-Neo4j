@@ -11,7 +11,6 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 public class Tag extends Node {
 	
 	
-	
 	@RelatedTo(type="Associated_To")
 	private Set<Tag> tags = new HashSet<Tag>();
 

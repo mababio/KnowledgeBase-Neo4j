@@ -1,37 +1,82 @@
 package org.mababio.spring.vaadin.ui;
 
-import org.mababio.spring.domain.Person;
+
 import org.mababio.spring.domain.Problem;
+import org.mababio.spring.domain.Solution;
+import org.mababio.spring.domain.Tag;
+import org.mababio.spring.inter.PersistService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.annotations.Theme;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.data.util.PropertysetItem;
+import com.vaadin.data.Validator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 
 @Theme("valo")
 @SpringUI(path="/test")
 public class vaadinTest extends UI {
 
+	@Autowired
+	PersistService service;
+	
+	
 	@Override
 	protected void init(VaadinRequest request) {
-		VerticalLayout layout = new VerticalLayout();
-        setContent(layout);
+		
+		Problem problem = new Problem();
+		
+		
+		
+		VerticalLayout  mainLayout= new VerticalLayout();
+		mainLayout.setSizeFull();
+		setContent(mainLayout);
+	
+		VerticalLayout layout = new VerticalLayout(); 
+		mainLayout.addComponent(layout);
+       mainLayout.setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
+      
+       
+       //form Components
+        TextField probField = new TextField("Problem");
+         probField.setSizeFull();
+ 
+        TextField tagField = new TextField("Tag"); 
+        Button addTag = new Button("Add Tag");
+        
+        Button perButton = new Button("Persist");
+        
+        
+        //Listener
+        addTag.addClickListener(listener -> {
+       //Notification.show("This is just the beginning!!!!" +fName.getValue()); 
+        	problem.consume(new Tag().setContent(tagField.getValue()));
+        }  );
+        
+        perButton.addClickListener(listner ->
+        {
+        	problem.setContent(probField.getValue());
+        	service.persist(problem);
+        	getUI().getPage().setLocation("localhost:8080/test"/*getUI().toString()*/);
+        	//close(); 
+        	
+
+        });
+        
+        layout.addComponents(probField, tagField, addTag, perButton);
         
         
         
-        final Button add_field = new Button("new Tag");
-        add_field.addClickListener(event -> layout.addComponent(new TextField("Tag")));
-        layout.addComponent(add_field);
+        
+        
 	}
 
 	
